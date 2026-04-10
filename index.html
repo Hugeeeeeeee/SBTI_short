@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SBTI极速少题版 - 搞笑人格测试</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFF8E7;
+      --bg-warm: #FFFBF0;
+      --panel: #FFFDF5;
+      --text: #2D3436;
+      --muted: #636E72;
+      --line: #F0E6D3;
+      --soft: #FFF3D6;
+      --accent: #FF6B6B;
+      --accent-strong: #FF5252;
+      --accent-light: #FFB3B3;
+      --teal: #4ECDC4;
+      --teal-light: #A8E6CF;
+      --yellow: #FFE66D;
+      --purple: #A78BFA;
+      --pink: #F472B6;
+      --shadow: 3px 3px 0px #2D3436, 6px 6px 0px rgba(0,0,0,0.05);
+      --shadow-hover: 4px 4px 0px #2D3436, 8px 8px 0px rgba(0,0,0,0.08);
+      --shadow-soft: 2px 2px 0px rgba(45,52,54,0.15);
+      --radius-wobbly: 255px 15px 225px 15px/15px 225px 15px 255px;
+      --radius-wobbly-alt: 15px 255px 15px 225px/225px 15px 255px 15px;
+      --font-doodle: 'Caveat', 'Indie Flower', cursive;
+      --font-hand: 'Patrick Hand', 'Indie Flower', cursive;
+      --font-body: 'Patrick Hand', 'Indie Flower', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      overflow-x: hidden;
+      /* Paper texture feel */
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(255,230,109,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(78,205,196,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(244,114,182,0.08) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========== KEYFRAMES ========== */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3) rotate(-5deg); }
+      50% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+      70% { transform: scale(0.95) rotate(-1deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px) rotate(-1deg); }
+      to { opacity: 1; transform: translateY(0) rotate(0deg); }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.85) rotate(-2deg); }
+      to { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-3deg); }
+      40% { transform: rotate(3deg); }
+      60% { transform: rotate(-2deg); }
+      80% { transform: rotate(2deg); }
+    }
+
+    @keyframes wiggleHover {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-2deg); }
+      75% { transform: rotate(2deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes spinStar {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    @keyframes drawLine {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes doodleFloat1 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(5px, -8px) rotate(5deg); }
+      50% { transform: translate(-3px, -15px) rotate(-3deg); }
+      75% { transform: translate(8px, -5px) rotate(3deg); }
+    }
+
+    @keyframes doodleFloat2 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(-8px, -10px) rotate(-5deg); }
+      66% { transform: translate(5px, -18px) rotate(4deg); }
+    }
+
+    @keyframes doodleFloat3 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      50% { transform: translate(3px, -12px) rotate(8deg) scale(1.1); }
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(30px) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes pencilSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0) rotate(-10deg); }
+      60% { transform: scale(1.15) rotate(3deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes squiggle {
+      0%, 100% { d: path("M0,10 Q5,0 10,10 Q15,20 20,10"); }
+      50% { d: path("M0,10 Q5,20 10,10 Q15,0 20,10"); }
+    }
+
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+    }
+
+    /* ========== REDUCED MOTION ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ========== QUESTION ANIMATIONS ========== */
+    .question {
+      animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      opacity: 0;
+    }
+
+    .question:nth-child(1) { animation-delay: 0.05s; }
+    .question:nth-child(2) { animation-delay: 0.1s; }
+    .question:nth-child(3) { animation-delay: 0.15s; }
+    .question:nth-child(4) { animation-delay: 0.2s; }
+    .question:nth-child(5) { animation-delay: 0.25s; }
+    .question:nth-child(n+6) { animation-delay: 0.3s; }
+
+    .type-box {
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      opacity: 0;
+    }
+
+    .poster-box {
+      animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+      opacity: 0;
+    }
+
+    .analysis-box,
+    .dim-box,
+    .note-box,
+    .author-box {
+      animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      opacity: 0;
+    }
+
+    .analysis-box { animation-delay: 0.2s; }
+    .dim-box { animation-delay: 0.3s; }
+    .note-box { animation-delay: 0.4s; }
+    .author-box { animation-delay: 0.5s; }
+
+    /* ========== RIPPLE ========== */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: ripple 0.6s ease-out;
+      pointer-events: none;
+    }
+
+    /* ========== SHELL ========== */
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== BUTTONS ========== */
+    button {
+      border: 3px solid var(--text);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font: inherit;
+      position: relative;
+      overflow: hidden;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      pointer-events: auto;
+      z-index: 100;
+    }
+
+    button:hover {
+      animation: wiggleHover 0.4s ease-in-out;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    button:active {
+      transform: translateY(0) scale(0.96);
+      box-shadow: var(--shadow-soft);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+      filter: grayscale(0.5);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 18px;
+      font-family: var(--font-doodle);
+      letter-spacing: 1px;
+      box-shadow: var(--shadow);
+      border-color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-strong);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background: var(--yellow);
+      color: var(--text);
+      padding: 14px 28px;
+      font-weight: 700;
+      font-size: 16px;
+      font-family: var(--font-doodle);
+      box-shadow: var(--shadow);
+      border-color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #FFD93D;
+      box-shadow: var(--shadow-hover);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .nav-buttons .btn-primary,
+    .nav-buttons .btn-secondary {
+      flex: 1;
+    }
+
+    .btn-small {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+
+    /* ========== SCREENS ========== */
+    .screen {
+      display: none;
+      min-height: 100dvh;
+      height: 100dvh;
+      position: relative;
+      z-index: 1;
+    }
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto;
+    }
+
+    /* ========== INTRO PAGE ========== */
+    #intro {
+      /* animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; */
+    }
+
+    .hero {
+      padding: 48px 36px;
+      margin-top: 20px;
+      background: var(--panel);
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: visible;
+      text-align: center;
+      pointer-events: auto;
+    }
+
+    /* Decorative doodle elements around hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: -18px;
+      right: -18px;
+      bottom: -18px;
+      border: 2px dashed var(--accent-light);
+      border-radius: var(--radius-wobbly-alt);
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: 30px;
+      width: 40px;
+      height: 40px;
+      background: var(--yellow);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: starTwinkle 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* Floating doodle decorations */
+    .doodle-star {
+      position: absolute;
+      pointer-events: none;
+      font-size: 24px;
+      opacity: 0.6;
+    }
+    .doodle-star-1 { top: -10px; left: 20px; animation: doodleFloat1 4s ease-in-out infinite; color: var(--accent); }
+    .doodle-star-2 { bottom: -5px; right: 40px; animation: doodleFloat2 5s ease-in-out infinite; color: var(--teal); }
+    .doodle-star-3 { top: 30px; right: -5px; animation: doodleFloat3 3.5s ease-in-out infinite; color: var(--purple); }
+
+    .hero h1 {
+      font-family: var(--font-doodle);
+      font-size: clamp(36px, 7vw, 64px);
+      line-height: 1.15;
+      letter-spacing: 2px;
+      color: var(--text);
+      margin: 0 0 12px;
+      position: relative;
+      display: inline-block;
+      transform: rotate(-1.5deg);
+      pointer-events: none;
+    }
+
+    /* Hand-drawn underline */
+    .hero h1::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: -5%;
+      width: 110%;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.6;
+      transform: rotate(-0.5deg);
+    }
+
+    /* Comic speech bubble for subtitle */
+    .speech-bubble {
+      position: relative;
+      background: var(--yellow);
+      border: 3px solid var(--text);
+      border-radius: 20px;
+      padding: 16px 24px;
+      margin: 24px auto 0;
+      max-width: 500px;
+      font-family: var(--font-hand);
+      font-size: 18px;
+      color: var(--text);
+      box-shadow: var(--shadow-soft);
+      transform: rotate(0.5deg);
+      pointer-events: none;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 20px solid var(--text);
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 17px solid var(--yellow);
+      z-index: 1;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      overflow: visible;
+      pointer-events: auto;
+    }
+
+    .hero-actions-single {
+      justify-content: center;
+      overflow: visible;
+      pointer-events: auto;
+    }
+
+    .hero-actions-single .btn-primary {
+      position: relative;
+      z-index: 100;
+    }
+
+    .hero.hero-minimal {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 24px;
+      min-height: 100%;
+      overflow-y: visible;
+      overflow-x: hidden;
+      position: relative;
+      z-index: 1;
+      pointer-events: auto;
+    }
+
+    /* Author credit */
+    .author-credit {
+      margin-top: 32px;
+      padding-top: 20px;
+      font-family: var(--font-doodle);
+      font-size: 16px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .author-credit a {
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 2px dashed var(--teal);
+      transition: all 0.2s ease;
+    }
+
+    .author-credit a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ========== TEST PAGE ========== */
+    .test-wrap,
+    .result-wrap {
+      margin-top: 22px;
+      padding: 28px;
+      background: var(--panel);
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* Hand-drawn thermometer progress bar */
+    .progress {
+      flex: 1;
+      min-width: 200px;
+      height: 28px;
+      background: var(--soft);
+      border: 3px solid var(--text);
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress > span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light), var(--yellow));
+      border-radius: inherit;
+      transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .progress > span::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    /* Pencil tip at the end of progress */
+    .progress > span::before {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid var(--yellow);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      z-index: 2;
+    }
+
+    .progress-text {
+      color: var(--text);
+      font-family: var(--font-doodle);
+      font-size: 18px;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    /* Question cards with wobbly borders */
+    .question {
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly);
+      padding: 24px;
+      background: var(--panel);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Random slight rotations for hand-drawn feel */
+    .question:nth-child(odd) { transform: rotate(-0.4deg); }
+    .question:nth-child(even) { transform: rotate(0.3deg); }
+    .question:nth-child(3n) { transform: rotate(0.5deg); }
+
+    .question:hover {
+      transform: rotate(0deg) translateY(-4px) !important;
+      box-shadow: var(--shadow);
+    }
+
+    /* Top color stripe */
+    .question::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--accent) 0px,
+        var(--accent) 8px,
+        var(--yellow) 8px,
+        var(--yellow) 16px,
+        var(--teal) 16px,
+        var(--teal) 24px,
+        var(--purple) 24px,
+        var(--purple) 32px
+      );
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .question:hover::before {
+      transform: scaleX(1);
+    }
+
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      font-family: var(--font-doodle);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      padding: 6px 14px;
+      background: var(--yellow);
+      border: 2px solid var(--text);
+      font-weight: 700;
+      color: var(--text);
+      font-family: var(--font-doodle);
+      font-size: 15px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+
+    .badge:hover {
+      transform: scale(1.08) rotate(-2deg);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .question-title {
+      font-size: 18px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      margin-bottom: 16px;
+      color: var(--text);
+      font-family: var(--font-hand);
+      font-weight: 600;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    /* Hand-drawn radio options */
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius-wobbly-alt);
+      border: 2.5px solid var(--line);
+      background: #fff;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option:hover {
+      border-color: var(--teal);
+      background: rgba(78, 205, 196, 0.08);
+      transform: translateX(6px) rotate(-0.3deg);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .option input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+      transform: scale(1.3);
+      flex-shrink: 0;
+    }
+
+    .option:has(input:checked) {
+      border-color: var(--accent);
+      border-width: 3px;
+      background: linear-gradient(135deg, rgba(255,107,107,0.08), rgba(255,230,109,0.12));
+      box-shadow: 3px 3px 0px var(--accent);
+      transform: translateX(6px) scale(1.01);
+    }
+
+    .option:has(input:checked) .option-code {
+      color: #fff;
+      background: var(--accent);
+      padding: 2px 10px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid var(--text);
+    }
+
+    .option:has(input:checked) div:nth-child(3) {
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+
+    .option-code {
+      font-weight: 800;
+      color: var(--accent);
+      min-width: 24px;
+      transition: all 0.3s ease;
+      font-family: var(--font-doodle);
+      font-size: 18px;
+    }
+
+    .actions-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 8px;
+    }
+
+    /* Comic thought bubble for hint */
+    .hint {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      font-family: var(--font-doodle);
+      padding: 12px 18px;
+      background: var(--soft);
+      border: 2px dashed var(--line);
+      border-radius: 20px;
+      position: relative;
+      max-width: 400px;
+    }
+
+    .hint::before {
+      content: '...';
+      position: absolute;
+      bottom: -16px;
+      left: 20px;
+      font-size: 20px;
+      color: var(--line);
+      letter-spacing: 4px;
+    }
+
+    .hint::after {
+      content: '...';
+      position: absolute;
+      bottom: -28px;
+      left: 30px;
+      font-size: 14px;
+      color: var(--line);
+      letter-spacing: 2px;
+    }
+
+    /* ========== RESULT PAGE ========== */
+    .result-layout {
+      display: grid;
+      gap: 24px;
+    }
+
+    .result-top {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    /* Comic explosion background for type box */
+    .type-box {
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly);
+      padding: 28px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .type-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,230,109,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Explosion rays behind type name */
+    .type-box::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      background:
+        conic-gradient(
+          from 0deg,
+          transparent 0deg, rgba(255,107,107,0.06) 10deg, transparent 20deg,
+          transparent 30deg, rgba(78,205,196,0.06) 40deg, transparent 50deg,
+          transparent 60deg, rgba(255,230,109,0.06) 70deg, transparent 80deg,
+          transparent 90deg, rgba(167,139,250,0.06) 100deg, transparent 110deg,
+          transparent 120deg, rgba(244,114,182,0.06) 130deg, transparent 140deg,
+          transparent 150deg, rgba(255,107,107,0.06) 160deg, transparent 170deg,
+          transparent 180deg, rgba(78,205,196,0.06) 190deg, transparent 200deg,
+          transparent 210deg, rgba(255,230,109,0.06) 220deg, transparent 230deg,
+          transparent 240deg, rgba(167,139,250,0.06) 250deg, transparent 260deg,
+          transparent 270deg, rgba(244,114,182,0.06) 280deg, transparent 290deg,
+          transparent 300deg, rgba(255,107,107,0.06) 310deg, transparent 320deg,
+          transparent 330deg, rgba(78,205,196,0.06) 340deg, transparent 360deg
+        );
+      pointer-events: none;
+      animation: spin 30s linear infinite;
+    }
+
+    .type-kicker {
+      font-family: var(--font-doodle);
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .type-name {
+      font-family: var(--font-doodle);
+      font-size: clamp(36px, 7vw, 60px);
+      line-height: 1.1;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      transform: rotate(-1deg);
+    }
+
+    /* Hand-drawn circle behind type name */
+    .type-name::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: calc(100% + 30px);
+      height: calc(100% + 20px);
+      transform: translate(-50%, -50%);
+      border: 3px dashed var(--accent-light);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: spin 20s linear infinite reverse;
+    }
+
+    .type-subname {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      font-family: var(--font-hand);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hand-drawn star sticker for match badge */
+    .match {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--yellow);
+      border: 3px solid var(--text);
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1.4;
+      font-family: var(--font-doodle);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .match::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: starTwinkle 2s ease-in-out infinite;
+    }
+
+    .match:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: var(--shadow);
+    }
+
+    /* Poster box */
+    .poster-box {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      min-height: 280px;
+      overflow: hidden;
+      position: relative;
+      background: var(--panel);
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly-alt);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .poster-box::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 100px;
+      height: 100px;
+      background: var(--teal-light);
+      border-radius: 50%;
+      opacity: 0.3;
+      pointer-events: none;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .poster-image {
+      width: 100%;
+      min-height: 220px;
+      max-height: 460px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.75);
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+      transform: scale(1);
+    }
+
+    .poster-image:hover {
+      transform: scale(1.03) rotate(0.5deg);
+    }
+
+    .poster-image.loading {
+      opacity: 0.5;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .poster-box.no-image .poster-image {
+      display: none;
+    }
+
+    .poster-caption {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-doodle);
+      font-style: italic;
+    }
+
+    /* Analysis box - torn notebook page style */
+    .analysis-box {
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly);
+      padding: 28px;
+      background:
+        linear-gradient(var(--panel) 95%, transparent 95%) repeat-y,
+        linear-gradient(90deg, rgba(78,205,196,0.15) 1px, transparent 1px);
+      background-size: 100% 32px, 100% 100%;
+      background-position: 0 0, 40px 0;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Red margin line */
+    .analysis-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 38px;
+      width: 2px;
+      height: 100%;
+      background: rgba(255,107,107,0.3);
+      pointer-events: none;
+    }
+
+    .analysis-box h3, .dim-box h3, .note-box h3 {
+      font-family: var(--font-doodle);
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: var(--text);
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .analysis-box h3::after, .dim-box h3::after, .note-box h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: rotate(-0.5deg);
+    }
+
+    .analysis-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 2;
+      white-space: pre-wrap;
+      font-family: var(--font-hand);
+    }
+
+    /* Dimension box */
+    .dim-box {
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly-alt);
+      padding: 28px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .dim-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    /* Dimension items with doodle-style pills */
+    .dim-item {
+      border: 2.5px solid var(--text);
+      border-radius: var(--radius-wobbly);
+      padding: 18px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Color bar on left side */
+    .dim-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--teal);
+      border-radius: 0 3px 3px 0;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .dim-item:nth-child(2)::before { background: var(--accent); }
+    .dim-item:nth-child(3)::before { background: var(--yellow); }
+    .dim-item:nth-child(4)::before { background: var(--purple); }
+    .dim-item:nth-child(5)::before { background: var(--pink); }
+
+    .dim-item:hover {
+      transform: translateY(-3px) rotate(-0.3deg);
+      box-shadow: var(--shadow);
+    }
+
+    .dim-item:hover::before {
+      transform: scaleY(1);
+    }
+
+    .dim-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dim-item-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      font-family: var(--font-doodle);
+    }
+
+    .dim-item-score {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 18px;
+      white-space: nowrap;
+      font-family: var(--font-doodle);
+      background: var(--yellow);
+      padding: 2px 10px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      border: 2px solid var(--text);
+    }
+
+    .dim-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      font-family: var(--font-hand);
+    }
+
+    /* Note box */
+    .note-box {
+      border: 3px dashed var(--accent-light);
+      border-radius: var(--radius-wobbly);
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(255,230,109,0.1), rgba(255,107,107,0.05));
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    .note-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+      font-family: var(--font-hand);
+    }
+
+    /* Author box - hand-written letter style */
+    .author-box {
+      border: 3px solid var(--text);
+      border-radius: var(--radius-wobbly-alt);
+      background:
+        linear-gradient(180deg, #FFF9E6, var(--panel));
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .author-box summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.3s ease;
+      font-family: var(--font-doodle);
+    }
+
+    .author-box summary:hover {
+      background: var(--soft);
+    }
+
+    .author-box summary::-webkit-details-marker { display: none; }
+
+    .author-box summary::after {
+      content: '展开';
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      border: 2px solid var(--text);
+      background: var(--yellow);
+      padding: 6px 14px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      flex-shrink: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: var(--font-doodle);
+    }
+
+    .author-box summary:hover::after {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .author-box[open] summary::after {
+      content: '收起';
+    }
+
+    .author-content {
+      border-top: 2px dashed var(--line);
+      padding: 0 24px 24px;
+    }
+
+    .author-content p {
+      margin: 16px 0 0;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 2;
+      font-family: var(--font-hand);
+    }
+
+    .result-actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ========== LOADING OVERLAY ========== */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 248, 231, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .loading-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Doodle-style spinning star/pencil loader */
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      animation: pencilSpin 1.2s linear infinite;
+    }
+
+    .loading-spinner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: spinStar 1.5s ease-in-out infinite;
+    }
+
+    .loading-spinner::after {
+      content: 'loading...';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-doodle);
+      font-size: 11px;
+      color: var(--text);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 860px) {
+      .result-top { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { padding: 14px 10px 42px; }
+      .test-wrap, .result-wrap { padding: 14px; }
+      .hero { padding: 28px 16px; overflow: hidden; }
+      .hero h1 { font-size: clamp(24px, 8vw, 32px); }
+      .hero::before { top: -8px; left: -8px; right: -8px; bottom: -8px; }
+      .hero::after { right: 8px; top: -12px; width: 24px; height: 24px; }
+      .doodle-star-3 { right: 4px; }
+      .question-title { font-size: 15px; }
+      .question { padding: 16px; }
+      .question:nth-child(odd),
+      .question:nth-child(even),
+      .question:nth-child(3n) { transform: none; }
+
+      .btn-primary, .btn-secondary {
+        padding: 14px 20px;
+        font-size: 16px;
+        min-height: 48px;
+      }
+
+      .option {
+        padding: 12px 14px;
+        min-height: 48px;
+      }
+
+      .badge {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
+      .speech-bubble {
+        font-size: 15px;
+        padding: 12px 16px;
+      }
+
+      .hint { max-width: 100%; }
+
+      /* 进度条适配 */
+      .progress { min-width: 100px; flex: 1; }
+      .progress-text { font-size: 13px; white-space: nowrap; }
+
+      /* 结果页容器内边距缩减 */
+      .type-box, .analysis-box, .dim-box { padding: 16px; }
+      .note-box { padding: 14px; }
+      .dim-item { padding: 12px; }
+      .result-top { gap: 16px; }
+
+      /* 结果页标题适配 */
+      .type-name { font-size: clamp(26px, 8vw, 36px); }
+      .type-kicker { font-size: 14px; }
+      .match { padding: 10px 16px; font-size: 14px; }
+
+      /* 海报图片 */
+      .poster-image { max-width: 100%; height: auto; }
+
+      /* 作者区域触摸目标 */
+      .author-box summary::after {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
+    /* 超小屏幕 (320px) 额外适配 */
+    @media (max-width: 380px) {
+      .shell { padding: 10px 6px 36px; }
+      .test-wrap, .result-wrap { padding: 10px; }
+      .hero { padding: 20px 12px; }
+      .hero h1 { font-size: clamp(22px, 7.5vw, 28px); }
+      .question { padding: 12px; }
+      .option { padding: 10px 12px; font-size: 14px; }
+      .type-name { font-size: clamp(22px, 7.5vw, 30px); }
+      .type-box, .analysis-box, .dim-box { padding: 12px; }
+    }
+
+    /* ========== EXTRA DOODLE DECORATIONS ========== */
+    /* Decorative squiggly lines as section dividers */
+    .doodle-divider {
+      text-align: center;
+      margin: 8px 0;
+      color: var(--line);
+      font-size: 20px;
+      letter-spacing: 8px;
+      user-select: none;
+    }
+
+    /* Small floating doodle elements using pseudo-elements */
+    .result-wrap > .result-layout > * {
+      position: relative;
+    }
+
+    /* Notebook paper holes on analysis box */
+    .analysis-box::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,107,107,0.3);
+      box-shadow: 0 28px 0 rgba(255,107,107,0.3), 0 56px 0 rgba(255,107,107,0.3);
+      pointer-events: none;
+    }
+
+    /* Tape effect on poster box */
+    .poster-box .poster-caption::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 20%;
+      width: 60%;
+      height: 18px;
+      background: rgba(255,230,109,0.5);
+      transform: rotate(-1deg);
+      border: 1px solid rgba(0,0,0,0.05);
+      pointer-events: none;
+    }
+
+    /* Fun confetti-like dots on result page */
+    .result-wrap::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 5%;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: doodleFloat1 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .result-wrap::after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      right: 8%;
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: doodleFloat2 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* h1, h2, h3, p reset */
+    h1, h2, h3, p { margin: 0; }
+
+    /* Make result-wrap relative for pseudo-element positioning */
+    .result-wrap {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG filter for squiggly effect (available if needed) -->
+  <svg style="position:absolute;width:0;height:0;">
+    <filter id="squiggly">
+      <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="0"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+    </filter>
+  </svg>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <canvas id="particles"></canvas>
+
+    <!-- ===== INTRO PAGE ===== -->
+    <section id="intro" class="screen active">
+      <div class="hero hero-minimal">
+        <!-- Floating doodle decorations -->
+        <span class="doodle-star doodle-star-1">&#9733;</span>
+        <span class="doodle-star doodle-star-2">&#10022;</span>
+        <span class="doodle-star doodle-star-3">&#10039;</span>
+
+        <h1>MBTI已经过时<br>SBTI极速少题版来了！</h1>
+
+        <!-- Comic speech bubble subtitle -->
+        <div class="speech-bubble">
+          20道灵魂拷问，测出你真正的搞笑人格~
+        </div>
+
+        <div class="hero-actions hero-actions-single">
+          <button id="startBtn" class="btn-primary" onclick="startTest(false)">开启SBTI极速版 &#10024;</button>
+        </div>
+
+        <div class="author-credit">
+          <span>原作者：<a href="https://space.bilibili.com/417038183" target="_blank">B站@蛆肉儿串儿</a></span>
+          <span>魔改者：SocietyKing</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell">
+    <!-- ===== TEST PAGE ===== -->
+    <section id="test" class="screen">
+      <div class="test-wrap">
+        <div class="topbar">
+          <button id="backIntroBtn" class="btn-secondary btn-small">← 返回</button>
+          <div class="progress"><span id="progressBar"></span></div>
+          <div class="progress-text" id="progressText">1 / 20</div>
+        </div>
+
+        <div id="questionList" class="question-list"></div>
+
+        <div class="nav-buttons">
+          <button id="prevBtn" class="btn-secondary" disabled>← 上一题</button>
+          <button id="nextBtn" class="btn-primary" disabled>下一题 →</button>
+        </div>
+
+        <div class="hint" id="testHint">选择答案后自动进入下一题</div>
+      </div>
+    </section>
+
+    <!-- ===== RESULT PAGE ===== -->
+    <section id="result" class="screen">
+      <div class="result-wrap">
+        <div class="result-layout">
+          <div class="result-top">
+            <div class="poster-box" id="posterBox">
+              <img id="posterImage" class="poster-image" alt="人格结果图" />
+              <div id="posterCaption" class="poster-caption">怎么样，被我拿捏了吧？</div>
+            </div>
+
+            <div class="type-box">
+              <div class="type-kicker" id="resultModeKicker">你的主类型</div>
+              <div class="type-name" id="resultTypeName">CTRL（拿捏者）</div>
+              <div class="match" id="matchBadge">匹配度 92%</div>
+              <div class="type-subname" id="resultTypeSub">系统备注会显示在这里。</div>
+            </div>
+          </div>
+
+          <div class="analysis-box">
+            <h3>该人格的简单解读</h3>
+            <p id="resultDesc"></p>
+          </div>
+
+          <div class="dim-box">
+            <h3>五维度评分</h3>
+            <div id="dimList" class="dim-list"></div>
+          </div>
+
+          <div class="note-box">
+            <h3>友情提示</h3>
+            <p id="funNote">本测试仅供娱乐，别拿它当诊断、面试、相亲、分手、招魂、算命或人生判决书。</p>
+          </div>
+
+          <details class="author-box">
+            <summary>作者的话</summary>
+            <div class="author-content">
+              <p>本测试首发于b站up主蛆肉儿串儿（UID417038183），初衷是劝诫一位爱喝酒的朋友戒酒。</p>
+              <p>由于作者的人格是SHIT愤世者，所以平等的攻击了各位，在此抱歉！！不过我是一个绝世大美女，你们一定会原谅我，有B站的朋友们也可以关注我。</p>
+              <p>关于这个测试，我没法很好的平衡娱乐和专业性，因此对于一些人格的阐释较为模糊或完全不准（如屌丝可能并非真的屌丝），如有冒犯非常抱歉！！</p>
+              <p>再鉴于时间精力有限，就随便搞了一个先这样玩玩，后续会慢慢完善修改的，总之好玩为主，还请不要用于盈利呀。</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="result-actions">
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button id="restartBtn" class="btn-secondary">重新测试</button>
+            <button id="toTopBtn" class="btn-primary">回到首页</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <script>
+    // Particle animation
+    (function initParticles() {
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let mouseX = 0;
+      let mouseY = 0;
+      let animationId;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function createParticles() {
+        particles = [];
+        const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            color: `rgba(74, 222, 128, ${Math.random() * 0.3 + 0.1})`
+          });
+        }
+      }
+
+      function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach((particle, index) => {
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
+
+          if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fillStyle = particle.color;
+          ctx.fill();
+
+          for (let j = index + 1; j < particles.length; j++) {
+            const dx = particle.x - particles[j].x;
+            const dy = particle.y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 100) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(74, 222, 128, ${0.15 * (1 - distance / 100)})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particle.x, particle.y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        });
+      }
+
+      function animate() {
+        drawParticles();
+        animationId = requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', () => {
+        resize();
+        createParticles();
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      resize();
+      createParticles();
+      animate();
+    })();
+
+    // Data
+    const dimensionMeta = {
+      FUN: { name: 'FUN 搞笑指数', model: '快乐模型' },
+      WEIRD: { name: 'WEIRD 奇葩指数', model: '个性模型' },
+      LAZY: { name: 'LAZY 懒惰指数', model: '生活模型' },
+      CRAZY: { name: 'CRAZY 疯狂指数', model: '行为模型' },
+      CHILL: { name: 'CHILL 淡定指数', model: '心态模型' }
+    };
+
+    const TYPE_IMAGES = {
+      "IMSB": "./image/IMSB.png",
+      "BOSS": "./image/BOSS.png",
+      "MUM": "./image/MUM.png",
+      "FAKE": "./image/FAKE.png",
+      "Dior-s": "./image/Dior-s.jpg",
+      "DEAD": "./image/DEAD.png",
+      "ZZZZ": "./image/ZZZZ.png",
+      "GOGO": "./image/GOGO.png",
+      "FUCK": "./image/FUCK.png",
+      "CTRL": "./image/CTRL.png",
+      "HHHH": "./image/HHHH.png",
+      "SEXY": "./image/SEXY.png",
+      "OJBK": "./image/OJBK.png",
+      "JOKE-R": "./image/JOKE-R.jpg",
+      "POOR": "./image/POOR.png",
+      "OH-NO": "./image/OH-NO.png",
+      "MONK": "./image/MONK.png",
+      "SHIT": "./image/SHIT.png",
+      "THAN-K": "./image/THAN-K.png",
+      "MALO": "./image/MALO.png",
+      "ATM-er": "./image/ATM-er.png",
+      "THIN-K": "./image/THIN-K.png",
+      "SOLO": "./image/SOLO.png",
+      "LOVE-R": "./image/LOVE-R.png",
+      "WOC!": "./image/WOC.png",
+      "DRUNK": "./image/DRUNK.png",
+      "IMFW": "./image/IMFW.png",
+      "FUNNY": "./image/FUNNY.jpg",
+      "WEIRDO": "./image/WEIRDO.jpg",
+      "LAZYBONE": "./image/LAZYBONE.jpg",
+      "CRAZYPANTS": "./image/CRAZYPANTS.jpg",
+      "CHILLMASTER": "./image/CHILLMASTER.jpg",
+      "FOODIE": "./image/FOODIE.jpg",
+      "GAMER": "./image/GAMER.jpg",
+      "INFLUENCER": "./image/INFLUENCER.jpg",
+      "NERD": "./image/NERD.jpg",
+      "ADVENTURER": "./image/ADVENTURER.jpg"
+    };
+
+    const NORMAL_TYPES = [
+      {
+        "code": "FUNNY",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "WEIRDO",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "LAZYBONE",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "CRAZYPANTS",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "CHILLMASTER",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "CTRL",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "ATM-er",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "Dior-s",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "BOSS",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "THAN-K",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "OH-NO",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "GOGO",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "SEXY",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "LOVE-R",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "MUM",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "FAKE",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "OJBK",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "MALO",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "JOKE-R",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "WOC!",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "THIN-K",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "SHIT",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "ZZZZ",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "POOR",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "MONK",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "IMSB",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "SOLO",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "FUCK",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "DEAD",
+        "pattern": "HHHH"
+      },
+      {
+        "code": "IMFW",
+        "pattern": "HHHH"
+      }
+    ];
+
+    const DIM_EXPLANATIONS = {
+      "FUN": {
+        "L": "你是个严肃的人，不苟言笑，喜欢认真对待每一件事",
+        "M": "你有时会开玩笑，但不会过度，保持适度的幽默感",
+        "H": "你是个搞笑担当，走到哪里都是欢乐的源泉"
+      },
+      "WEIRD": {
+        "L": "你是个循规蹈矩的人，喜欢按部就班地生活",
+        "M": "你偶尔会有一些奇怪的想法，但不会太出格",
+        "H": "你是个奇葩，思维方式异于常人，充满独特的创意"
+      },
+      "LAZY": {
+        "L": "你是个勤奋的人，总是充满活力地完成各种任务",
+        "M": "你有时会偷懒，但关键时候还是会努力",
+        "H": "你是个懒骨头，能躺着绝不坐着，能坐着绝不站着"
+      },
+      "CRAZY": {
+        "L": "你是个稳重的人，做事三思而后行，很少冲动",
+        "M": "你有时会尝试一些新鲜事物，但不会太冒险",
+        "H": "你是个疯子，喜欢挑战极限，追求刺激的体验"
+      },
+      "CHILL": {
+        "L": "你是个容易紧张的人，遇到事情会焦虑不安",
+        "M": "你有时会紧张，但能很快调整自己的情绪",
+        "H": "你是个淡定大师，无论遇到什么事情都能保持冷静"
+      }
+    };
+
+    const dimensionOrder = ['FUN','WEIRD','LAZY','CRAZY','CHILL'];
+
+    const DRUNK_TRIGGER_QUESTION_ID = 'drink_gate_q2';
+
+    const questions = [
+      {
+        id: 'q1', dim: 'FUN',
+        text: '如果你在电梯里放了个屁，你会怎么做？',
+        options: [
+          { label: '假装什么都没发生，面无表情', value: 1 },
+          { label: '尴尬地笑一笑，承认是自己', value: 2 },
+          { label: '环顾四周，假装是别人放的', value: 3 },
+          { label: '故意大声说："谁放的屁？好香啊！"', value: 4 }
+        ]
+      },
+      {
+        id: 'q2', dim: 'WEIRD',
+        text: '如果你能拥有一种超能力，你会选择什么？',
+        options: [
+          { label: '飞行能力', value: 1 },
+          { label: '隐身能力', value: 2 },
+          { label: '能和动物对话', value: 3 },
+          { label: '能让所有食物变成巧克力', value: 4 }
+        ]
+      },
+      {
+        id: 'q3', dim: 'LAZY',
+        text: '当你需要倒垃圾时，你会怎么做？',
+        options: [
+          { label: '立即去倒', value: 1 },
+          { label: '等一下再倒', value: 2 },
+          { label: '攒到明天一起倒', value: 3 },
+          { label: '假装没看到，让别人去倒', value: 4 }
+        ]
+      },
+      {
+        id: 'q4', dim: 'CRAZY',
+        text: '如果你突然有了100万，你会怎么花？',
+        options: [
+          { label: '存银行，慢慢用', value: 1 },
+          { label: '买房子或车子', value: 2 },
+          { label: '环球旅行', value: 3 },
+          { label: '全部用来买彩票，争取中更大的奖', value: 4 }
+        ]
+      },
+      {
+        id: 'q5', dim: 'CHILL',
+        text: '当你遇到堵车时，你会怎么做？',
+        options: [
+          { label: '急躁地按喇叭', value: 1 },
+          { label: '耐心等待，听音乐', value: 2 },
+          { label: '下车散步', value: 3 },
+          { label: '干脆熄火睡觉', value: 4 }
+        ]
+      },
+      {
+        id: 'q6', dim: 'FUN',
+        text: '如果你能和历史上任何人共进晚餐，你会选择谁？',
+        options: [
+          { label: '孔子', value: 1 },
+          { label: '爱因斯坦', value: 2 },
+          { label: '莎士比亚', value: 3 },
+          { label: '周星驰', value: 4 }
+        ]
+      },
+      {
+        id: 'q7', dim: 'WEIRD',
+        text: '如果你能变成一种动物，你会选择什么？',
+        options: [
+          { label: '狮子', value: 1 },
+          { label: '猫', value: 2 },
+          { label: '企鹅', value: 3 },
+          { label: '树懒', value: 4 }
+        ]
+      },
+      {
+        id: 'q8', dim: 'LAZY',
+        text: '当你需要打扫房间时，你会怎么做？',
+        options: [
+          { label: '一次性打扫完', value: 1 },
+          { label: '分几天慢慢打扫', value: 2 },
+          { label: '拖到最后一刻', value: 3 },
+          { label: '找别人帮忙', value: 4 }
+        ]
+      },
+      {
+        id: 'q9', dim: 'CRAZY',
+        text: '如果你能穿越到过去，你会做什么？',
+        options: [
+          { label: '阻止某些历史事件', value: 1 },
+          { label: '与历史人物合影', value: 2 },
+          { label: '买彩票中大奖', value: 3 },
+          { label: '告诉古人未来的科技', value: 4 }
+        ]
+      },
+      {
+        id: 'q10', dim: 'CHILL',
+        text: '当你收到一个坏消息时，你会怎么做？',
+        options: [
+          { label: '情绪崩溃', value: 1 },
+          { label: '冷静分析，寻找解决办法', value: 2 },
+          { label: '找朋友倾诉', value: 3 },
+          { label: '睡一觉再说', value: 4 }
+        ]
+      },
+      {
+        id: 'q11', dim: 'FUN',
+        text: '你觉得最搞笑的电影类型是？',
+        options: [
+          { label: '动作喜剧', value: 1 },
+          { label: '黑色幽默', value: 2 },
+          { label: '情景喜剧', value: 3 },
+          { label: '无厘头喜剧', value: 4 }
+        ]
+      },
+      {
+        id: 'q12', dim: 'WEIRD',
+        text: '如果你能和任何物品对话，你会选择？',
+        options: [
+          { label: '电脑，学习更多知识', value: 1 },
+          { label: '手机，问问它都知道什么秘密', value: 2 },
+          { label: '床，问问它怎么睡得更舒服', value: 3 },
+          { label: '冰箱，了解里面有什么好吃的', value: 4 }
+        ]
+      },
+      {
+        id: 'q13', dim: 'LAZY',
+        text: '周末早上，你通常几点起床？',
+        options: [
+          { label: '8点以前', value: 1 },
+          { label: '8-10点', value: 2 },
+          { label: '10-12点', value: 3 },
+          { label: '12点以后', value: 4 }
+        ]
+      },
+      {
+        id: 'q14', dim: 'CRAZY',
+        text: '如果可以养一只宠物，你会选择？',
+        options: [
+          { label: '鹦鹉或鱼', value: 1 },
+          { label: '猫咪或狗狗', value: 2 },
+          { label: '仓鼠或兔子', value: 3 },
+          { label: '蛇或蜥蜴', value: 4 }
+        ]
+      },
+      {
+        id: 'q15', dim: 'CHILL',
+        text: '当你被人误解时，你会？',
+        options: [
+          { label: '生气，和对方理论', value: 1 },
+          { label: '详细解释，一定要澄清', value: 2 },
+          { label: '简单解释一下', value: 3 },
+          { label: '不解释，清者自清', value: 4 }
+        ]
+      },
+      {
+        id: 'q16', dim: 'FUN',
+        text: '如果你能发明一种新食物，你会发明什么？',
+        options: [
+          { label: '健康又美味的蔬菜', value: 1 },
+          { label: '不会胖的巧克力', value: 2 },
+          { label: '会发光的冰淇淋', value: 3 },
+          { label: '吃了就能变聪明的饼干', value: 4 }
+        ]
+      },
+      {
+        id: 'q17', dim: 'WEIRD',
+        text: '如果你能改变自己的一个身体部位，你会选择？',
+        options: [
+          { label: '眼睛，让视力更好', value: 1 },
+          { label: '腿，让跑得更快', value: 2 },
+          { label: '手，让更灵活', value: 3 },
+          { label: '耳朵，能听到超声波', value: 4 }
+        ]
+      },
+      {
+        id: 'q18', dim: 'LAZY',
+        text: '当你需要洗碗时，你会怎么做？',
+        options: [
+          { label: '立即去洗', value: 1 },
+          { label: '等一下再洗', value: 2 },
+          { label: '攒到明天一起洗', value: 3 },
+          { label: '叫别人去洗', value: 4 }
+        ]
+      },
+      {
+        id: 'q19', dim: 'CRAZY',
+        text: '如果可以去任何地方旅行，你会选择？',
+        options: [
+          { label: '巴黎，浪漫之都', value: 1 },
+          { label: '马尔代夫，享受阳光沙滩', value: 2 },
+          { label: '冰岛，看极光', value: 3 },
+          { label: '南极，挑战极限', value: 4 }
+        ]
+      },
+      {
+        id: 'q20', dim: 'CHILL',
+        text: '当你收到一个意外的礼物时，你会？',
+        options: [
+          { label: '怀疑对方有什么目的', value: 1 },
+          { label: '礼貌感谢，心里可能不喜欢', value: 2 },
+          { label: '感谢对方，妥善保管', value: 3 },
+          { label: '非常开心，马上使用', value: 4 }
+        ]
+      }
+    ];
+
+    const specialQuestions = [
+      {
+        id: 'drink_gate_q1',
+        special: true,
+        kind: 'drink_gate',
+        text: '您平时有什么爱好？',
+        options: [
+          { label: '吃喝拉撒', value: 1 },
+          { label: '艺术爱好', value: 2 },
+          { label: '饮酒', value: 3 },
+          { label: '健身', value: 4 }
+        ]
+      },
+      {
+        id: 'drink_gate_q2',
+        special: true,
+        kind: 'drink_trigger',
+        text: '您对饮酒的态度是？',
+        options: [
+          { label: '小酌怡情，喝不了太多。', value: 1 },
+          { label: '我习惯将白酒灌在保温杯，当白开水喝，酒精令我信服。', value: 2 }
+        ]
+      }
+    ];
+
+    const TYPE_LIBRARY = {
+      "CTRL": {
+        "code": "CTRL",
+        "cn": "拿捏者",
+        "intro": "怎么样，被我拿捏了吧？",
+        "desc": "恭喜您，您测出了全中国最为罕见的人格，您是宇宙熵增定律的天然反抗者！全世界所谓成功人士里，99.99%都是您的拙劣模仿者。CTRL人格，是行走的人形自走任务管理器，普通人眼中的“规则”，在您这里只是出厂的基础参数设置；凡人所谓的“计划”，对您而言不过是心血来潮的随手涂鸦。拥有一个CTRL朋友意味着什么？意味着你的人生导航系统会变得更加精准、高效。因为CTRL最会拿捏了。CTRL会在你人生列车即将脱轨的前一秒，用一个“Ctrl+S”帮你硬核存档，再用一套无法拒绝的逻辑把你强行拽回正轨。他们是你混乱生活最后的备份盘，是宇宙崩塌前唯一还亮着的那个重启键。"
+      },
+      "ATM-er": {
+        "code": "ATM-er",
+        "cn": "送钱者",
+        "intro": "你以为我很有钱吗？",
+        "desc": "恭喜您，您竟然测出了这个世界上最稀有的人格。您或将成为金融界的未解之谜——是的，ATM-er不一定真的“送钱”，但可能永远在“支付”。支付时间、支付精力、支付耐心、支付一个本该安宁的夜晚。因此像一部老旧但坚固的ATM机，插进去的是别人的焦虑和麻烦，吐出来的是“没事，有我”的安心保证。您的人生就是一场盛大的、无人喝彩的单人付账秀。您竟用磐石般的可靠，承受了瀑布般的索取，偶尔夜深人静才会对着账单——可能是精神上的——发出一声叹息：我这该死的、无处安放的责任心啊。"
+      },
+      "Dior-s": {
+        "code": "Dior-s",
+        "cn": "屌丝",
+        "intro": "等着我屌丝逆袭。",
+        "desc": "恭喜！您并非屌丝，您是犬儒主义先贤第欧根尼失散多年的精神传人，因为屌丝的全称是 Diogenes' Original Realist - sage。Dior-s人格，是对当代消费主义陷阱和成功学PUA最彻底的蔑视。他们不是“不求上进”，而是早已看穿一切“上进”的尽头不过是更高级的牢房。屌丝有着大智慧。当别人在追逐风口，被时代的巨浪拍得七荤八素时，Dior-s早已在自己的精神木桶里晒着太阳，达到了“人桶合一”的至高境界。他们信奉的不是空话，是经过亿万次实践检验的物理法则与生物本能：一、躺着比站着舒服；二、饭点到了就得干饭。"
+      },
+      "BOSS": {
+        "code": "BOSS",
+        "cn": "领导者",
+        "intro": "方向盘给我，我来开。",
+        "desc": "BOSS是一个手里永远拿着方向盘的人。哪怕油箱已经亮了红灯，哪怕导航在胡说八道，你都会面无表情地说一句：我来开。然后真的把车开到了目的地。该人格拥有独立的物理法则——永恒向上定律。BOSS人格看世界，就像玩通关了的玩家在看新手教程。效率是他们的信仰，秩序是他们的呼吸。他们不是“自带领袖气场”，他们本身就是人形的气场发生器，方圆五米内，空气都会自动变得严肃而高效。他们眼中的“自我突破”，约等于普通人眼中的“自虐”。今天掌握一门新语言，明天考下一个专业证书，后天就计划殖民火星。你说这太卷了，他会用一种看弱鸡的眼神看着你：不是我太狠，是你太松。"
+      },
+      "THAN-K": {
+        "code": "THAN-K",
+        "cn": "感恩者",
+        "intro": "我感谢苍天！我感谢大地！",
+        "desc": "恭喜您，您测出了全中国最为罕见的人格。您应当感谢我！感谢您在此刻拥有了生命的滋润！倘若您上班路上堵车了？您也应当说一句：我感谢这次堵车，它让我有更多时间聆听这首美妙的歌曲，并欣赏窗外每一张因焦虑而扭曲的脸庞，让我更珍惜内心的平静。是的，THAN-K拥有温润如玉的性格和海纳百川的胸怀。他们眼中的世界没有完全的坏人，只有“尚未被感恩光芒照耀到的朋友”。拥有一个THAN-K朋友，就像身边多了一个永不枯竭的正能量发射塔。TA甚至能帮你从墙角的霉斑里发现一幅梵高风格的星空图。"
+      },
+      "OH-NO": {
+        "code": "OH-NO",
+        "cn": "哦不人",
+        "intro": "哦不！我怎么会是这个人格？！",
+        "desc": "哦不！并非恐惧的尖叫，而是一种顶级的智慧。当普通人看到一个杯子放在桌沿，哦不人看到的是一场由“水渍-短路-火灾-全楼疏散-经济损失-蝴蝶效应-世界末日”构成的灾难史诗。于是，伴随着一声发自灵魂深处的 Oh, no!，他们会以迅雷不及掩耳之势把杯子挪到桌子正中央，然后再垫上一张吸水杯垫。哦不人对“边界”有一种近乎偏执的尊重：你的就是你的，我的就是我的。所有意外和风险都已经在他的“Oh, no!”声中，被扼杀在了萌芽状态。他们是秩序的守护神，是混乱世界里最后那批神经绷得很直的体面人。"
+      },
+      "GOGO": {
+        "code": "GOGO",
+        "cn": "行者",
+        "intro": "gogogo~出发咯",
+        "desc": "经研究发现，GOGO人格的大脑构造与常人有根本性不同。GOGO活在一个极致的“所见即所得”世界里，人生信条简单粗暴到令人发指：只要我闭上眼睛，天就是黑的；只要我把钱都花了，我就没有钱了；只要我站在斑马线上，我现在就是行人了。逻辑完美闭环，根本无法反驳。别人还在为“先有鸡还是先有蛋”而辩论，GOGO行者已经把鸡和蛋一起做成了一盘“鸡生蛋，蛋生鸡之终极奥义盖浇饭”。他们不是在“解决问题”，他们是在“清除待办事项”。对他们来说，世界上只有两种状态：已完成，和即将被我完成。"
+      },
+      "SEXY": {
+        "code": "SEXY",
+        "cn": "尤物",
+        "intro": "您就是天生的尤物！",
+        "desc": "当您走进一个房间，照明系统会自动将您识别为天生的尤物，并自觉调暗亮度，以避免能源浪费。当您微笑时，您就变成了微笑着的尤物，周围的空气湿度也会显著下降，因为水蒸气都凝结成了人眼中的爱心。无论是谁，都容易对您的存在产生一种超标的注意力。传说，如果有足够多的SEXY人格聚集在一起开派对，其释放出的综合魅力能量足以暂时扭曲时空结构，让参加者产生“时间变慢了”的幸福错觉。他们不需要卖力表达，很多时候，单是存在本身就已经很像一篇华丽到过分的赋。"
+      },
+      "LOVE-R": {
+        "code": "LOVE-R",
+        "cn": "多情者",
+        "intro": "爱意太满，现实显得有点贫瘠。",
+        "desc": "LOVE-R人格像远古神话时代幸存至今的珍稀物种，其存在概率比你在马桶里钓到作者胳膊的概率还低。您简直是这个钢铁森林时代最后的、也是最不合时宜的吟游诗人。因为您的情感处理器不是二进制的，而是彩虹制的。一片落叶，在常人眼里只是“秋天来了”，在LOVE-R眼中，则是一场关于轮回、牺牲与无言之爱的十三幕悲喜剧。您内心世界像一座永不关门的主题公园，一生都在寻找那个能看懂园区地图、并愿意陪你坐旋转木马直到宇宙尽头的灵魂伴侣。"
+      },
+      "MUM": {
+        "code": "MUM",
+        "cn": "妈妈",
+        "intro": "或许...我可以叫你妈妈吗....?",
+        "desc": "恭喜您，您测出了全中国最稀有的妈妈人格。是的，在混沌未开、时间尚无姓名之前，在第一颗恒星打出第一个嗝之前，就已经有了妈妈。妈妈人格的底色是温柔，擅长感知情绪，具有超强共情力，知道什么时候该停下来，什么时候该对自己说一句“算了”。妈妈像一个医生，治愈了别人的不开心。只可惜，当妈妈落泪时，TA给自己的药，剂量总是比给别人小一号。MUM对自己的温柔，常常打了折。"
+      },
+      "FAKE": {
+        "code": "FAKE",
+        "cn": "伪人",
+        "intro": "已经，没有人类了。",
+        "desc": "SCP基金会紧急报告：项目编号 SCP-CN-████ “伪人”。在社交场合，伪人是八面玲珑的存在，因为他们切换人格面具比切换手机输入法还快。上一秒还是推心置腹的铁哥们模式，下一秒领导来了，瞬间切换成沉稳可靠好员工模式，连脸上的光泽度和卷曲度都会发生微调。你以为你交到了一个真心懂你的朋友？醒醒。你只是幸运地遇到了一个善于伪装、高性能的仿生人罢了。夜深人静时，伪人把面具一层层摘下来，最后才发现，面具下空得很，正是这些面具构成了自己。"
+      },
+      "OJBK": {
+        "code": "OJBK",
+        "cn": "无所谓人",
+        "intro": "我说随便，是真的随便。",
+        "desc": "让我们直面这个词的粗犷本质：OJBK。这已经不是一种人格，而是一种统治哲学。当凡人面临“中午吃米饭还是面条”的世纪抉择时，大脑在激烈燃烧卡路里；而OJBK人格，会用一种批阅奏章般的淡然，轻飘飘地吐出两个字：都行。这不是没主见，这是在告诉你：尔等凡俗的选择，于朕而言，皆为蝼蚁。为什么不争执？因为跟草履虫辩论宇宙的未来毫无意义。为什么不较真？因为帝王不会在意脚下的尘埃是往左飘还是往右飘。"
+      },
+      "MALO": {
+        "code": "MALO",
+        "cn": "吗喽",
+        "intro": "人生是个副本，而我只是一只吗喽。",
+        "desc": "朋友，你不是“童心未泯”，你压根就没进化。你的灵魂还停留在那个挂在树上荡秋千、看见香蕉就两眼放光的快乐时代。当人类祖先决定从树上下来、学会直立行走、穿上西装打领带时，吗喽人格的祖先在旁边的大树上看着他们，挠了挠屁股，嘴里发出一声不屑的“吱”。他们看透了一切：所谓的“文明”，不过是一场最无聊、最不好玩的付费游戏。规则偶尔是可以打破的，天花板是用来倒挂的，会议室是用来表演后空翻的。MALO本身就是一个从巨大脑洞里掉出来、忘了关门的奇思妙想。"
+      },
+      "JOKE-R": {
+        "code": "JOKE-R",
+        "cn": "小丑",
+        "intro": "原来我们都是小丑。",
+        "desc": "请注意，JOKE-R人格不是一个“人”，更像一个把笑话穿在身上的小丑。你打开一层，是个笑话；再打开一层，是个段子；你一层层打开，直到最后，你发现最里面……是空的，只剩下一点微弱的回声在说：哈，没想到吧。JOKE-R是社交场合的气氛组组长兼唯一指定火力输出。有他们在，场子就不会冷。所有人前仰后合地笑着，而笑得最开心的，往往也是他们自己——用最大的笑声，盖住心碎的声音。"
+      },
+      "WOC!": {
+        "code": "WOC!",
+        "cn": "握草人",
+        "intro": "卧槽，我怎么是这个人格？",
+        "desc": "我们发现了一种神奇的生物——WOC!人。他们拥有两种完全独立的操作系统：一个叫“表面系统”，负责发出“我操”“牛逼”“啊？”等一系列大惊小怪的拟声词；另一个叫“后台系统”，负责冷静分析：嗯，果然不出我所料。WOC!人只会卧槽，不会多管闲事，因为他们深知，给傻逼讲道理，就像扶着烂泥上墙，不仅浪费体力，还弄自己一手屎。所以他们选择，握着一根智慧的大草，用一声饱含深情的“WOC！”来为这个疯狂的世界献上最高敬意。"
+      },
+      "THIN-K": {
+        "code": "THIN-K",
+        "cn": "思考者",
+        "intro": "已深度思考100s。",
+        "desc": "经研究发现，THIN-K人格的大脑构造与常人有根本性不同。正如名称所示，您的大脑长时间处于思考状态。您十分会审判信息，注重论点、论据、逻辑推理、潜在偏见，乃至“作者本人三代以内思想背景调查报告”的全套材料。在这个信息爆炸的时代，您绝不会轻易盲从，会在关系中衡量利弊，也十分捍卫自己的自我空间。当别人看到您独处时在发呆？愚蠢，那不是发呆，那是您的大脑正在对今天接收到的所有信息进行分类、归档和销毁。"
+      },
+      "SHIT": {
+        "code": "SHIT",
+        "cn": "愤世者",
+        "intro": "这个世界，构石一坨。",
+        "desc": "恭喜您，SHIT人格是宇宙中已知的唯一一种稀有人格。所谓狗屎，并不是在抱怨，而是在进行一种神秘仪式。SHIT的行为模式是一场惊天动地的悖论戏剧。嘴上：这个项目简直是屎。手上：默默打开 Excel，开始建构函数模型和甘特图。嘴上：这帮同事都是 shit。手上：在同事搞砸之后，一边烦着，一边熬夜把烂摊子收拾得明明白白。嘴上：这个世界就是一坨 shit，赶紧毁灭吧。手上：第二天早上七点准时起床，挤上 shit 一样的地铁，去干那份 shit 一样的工作。别怕，那不是世界末日的警报，那是他马上要开始拯救世界的冲锋号。"
+      },
+      "ZZZZ": {
+        "code": "ZZZZ",
+        "cn": "装死者",
+        "intro": "我没死，我只是在睡觉。",
+        "desc": "恭喜您，您测出了全中国最稀有的装死人格。群里99+条消息您可以视而不见，但当有人发出“@全体成员 还有半小时就截止了”的最后通牒时，您也许会像刚从千年古墓里苏醒一样，缓缓地敲出一个“收到”，然后在29分钟内，交出一份虽然及格的答卷。是的，直到“死线”这个唯一的、最高权限的指令出现，您就真正爆发了，不鸣则已，一鸣惊人。您向宇宙证明了一个真理：有时什么都不做，就不会做错。"
+      },
+      "POOR": {
+        "code": "POOR",
+        "cn": "贫困者",
+        "intro": "我穷，但我很专。",
+        "desc": "恭喜您，您测出了【POOR - 贫困者】。这个“贫困”不是钱包余额的判决书，更像一种欲望断舍离后的资源再分配。别人把精力撒成漫天二维码，你把精力压成一束激光，照哪儿，哪儿就开始冒烟。POOR的世界很简单：不重要的东西一律降噪，重要的东西狠狠干到底。热闹、社交、虚荣、到处刷存在感？抱歉，没空。你不是资源少，你是把资源全部灌进了一个坑里，所以看起来像贫困，实际上像矿井。一旦某件事被你认定值得钻，外界再吵也只是背景杂音。"
+      },
+      "MONK": {
+        "code": "MONK",
+        "cn": "僧人",
+        "intro": "没有那种世俗的欲望。",
+        "desc": "当别人在KTV里参悟爱与恨的纠缠，MONK人格选择在家中参悟一份大道。MONK已然看破红尘，不希望闲人来扰其清修、破其道行。MONK的个人空间，是他们的结界，是他们的须弥山，是他们的绝对领域，神圣不可侵犯。踏入者，会感受到一种来自灵魂深处的窒息感。MONK们不黏不缠，因为在他们的世界观里，万物皆有其独立轨道。行星与行星之间保持着亿万公里的距离，才构成和谐宇宙，人与人之间为什么不行？"
+      },
+      "IMSB": {
+        "code": "IMSB",
+        "cn": "傻者",
+        "intro": "认真的么？我真的是傻逼么？",
+        "desc": "恭喜您！您根本不在人类范畴内！您测出了百万年一遇的【IMSB】人格。IMSB人格的大脑里住着两个不死不休的究极战士：一个叫“我他妈冲了！”，另一个叫“我是个傻逼！”。当IMSB面对一个有好感的人时，前者会说：冲啊！去要微信！去约饭！爱要大声说出来！后者接着说：人家凭什么看得上你？你去了就是自取其辱！最终结果：盯着对方背影直到消失，然后掏出手机搜索“如何克服社交恐惧症”。IMSB不是真的傻，只是您的内心戏，可能比漫威宇宙所有电影加起来都长。"
+      },
+      "SOLO": {
+        "code": "SOLO",
+        "cn": "孤儿",
+        "intro": "我哭了，我怎么会是孤儿？",
+        "desc": "恭喜您，您测出了全中国最稀有的【SOLO - 孤儿】人格。别急着哭，国王的加冕仪式，通常都是一个人。孤儿的自我价值感偏低，因此有时主动疏远他人，孤儿们在自己的灵魂外围建起了一座名为“莫挨老子”的万里长城。每一块砖，都是过去的一道伤口。孤儿就像一只把所有软肋都藏起来，然后用最硬的刺对着世界的刺猬。那满身的尖刺不是攻击，那是一句句说不出口的“别过来，我怕你也受伤”和“求求你，别离开”。"
+      },
+      "FUCK": {
+        "code": "FUCK",
+        "cn": "草者",
+        "intro": "操！这是什么人格？",
+        "desc": "恭喜您！您根本不在人类范畴内！您测出了百万年一遇的【FUCK】人格。人类文明城市里，出现了一株无法被任何除草剂杀死的、具有超级生命力的人形野草——那就是草者人格。它的学名，就叫 FUCK。在FUCK的世界观里，世俗规则简直毫无意义，并且FUCK的情绪开关是物理拨片式的：FUCK YEAH 和 FUCK OFF。FUCK追求的不只是当下快感，也在追求一种在体内横冲直撞的生命力。当所有人都被驯化成了温顺家禽，FUCK则是荒野上最后那一声狼嚎。"
+      },
+      "DEAD": {
+        "code": "DEAD",
+        "cn": "死者",
+        "intro": "我，还活着吗？",
+        "desc": "恭喜您，您测出了全中国最为罕见的人格，只是“死者”这个名字实在有点晦气，所以也可以叫：Don't Expect Any Drives。死者已经看透了那些无意义的哲学思考，因此显得对一切“失去”了兴趣。死者们看世界的眼神，就像一位顶级玩家通关了所有主线、支线、隐藏任务，删档重开了999次之后，终于发现：这游戏压根就没意思。死者是超越了欲望和目标的终极贤者。他们的存在，就是对这个喧嚣世界最沉默也最彻底的抗议。"
+      },
+      "IMFW": {
+        "code": "IMFW",
+        "cn": "废物",
+        "intro": "我真的...是废物吗？",
+        "desc": "恭喜您，您测出的不是一个普通人格，您是一种极其珍稀的、仅占世界人口0.0001％的——【废物】。废物们的自尊通常有些脆弱，缺乏安全感，偶尔也会缺乏主见，因此这种人格能精确地感知到周围最强的那个 WiFi 信号——也就是他们心里最可靠的人。走进【废物】人格的生活，就像走进了一个顶级兰花温室：需要精确控制温度、湿度，以及每天定时进行“我爱你”的言语光合作用。给废物一颗糖，他们会还你一个完全信任你、亮晶晶的眼神。你未必是废物，你只是太没防备，太容易认真。"
+      },
+      "HHHH": {
+        "code": "HHHH",
+        "cn": "傻乐者",
+        "intro": "哈哈哈哈哈哈。",
+        "desc": "恭喜您！由于您的思维回路过于清奇，标准人格库已全面崩溃。第一人格匹配率只有60％以下时，系统才会为您强制匹配这个人格——【HHHH - 傻乐者】。这个人格有什么特质？哈哈哈哈哈哈哈哈哈哈哈哈！对不起，这就是全部的特质了。您可以查看十五维度进行不专业的评估，实在是抱歉！作者设置人格时没有考虑全面，因此才会出现这样的状况。哈哈哈哈哈哈……笑着笑着，我便哭了出来。怎么会有人的脑回路这么新奇。"
+      },
+      "DRUNK": {
+        "code": "DRUNK",
+        "cn": "酒鬼",
+        "intro": "烈酒烧喉，不得不醉。",
+        "desc": "您为什么走路摇摇晃晃？您为什么总是情绪高涨？您为什么看东西是重影的？因为您体内流淌的不是血液，是美味的五粮液！是国窖1573！是江小白！是陕西五粮液！哦，美味的白酒，每一滴都在燃烧，都在沸腾。您是否已经习惯了将白酒灌入保温杯，当作白开水一饮而下？多么伟大的白酒！它让您在饭桌上谈笑风生，在厕所里抱着马桶忏悔人生；它让您觉得自己是夜场诗人，是宇宙中心那团不灭的火，直到第二天上午十点，您的头像裂开的核桃，嘴角挂着食物残渣，灵魂缩在角落里。您终于明白，昨晚那个高谈阔论、拍桌怒吼的人，已经成为了一个酒鬼。"
+      },
+      "FUNNY": {
+        "code": "FUNNY",
+        "cn": "电子榨菜",
+        "intro": "我就是快乐风干机！",
+        "desc": "恭喜您！您是行走的外卖小哥，专送快乐。您的脑子里装了个自动笑话生成器，待机时间比手机还长。朋友聚会带上您，气氛直接拉满三个档次；家庭聚会带上您，妈妈再也不用担心冷场。您仿佛靠一己之力拉高了整个城市的幸福指数，居委会都在考虑给您发锦旗。"
+      },
+      "WEIRDO": {
+        "code": "WEIRDO",
+        "cn": "人形弹幕",
+        "intro": "我疯起来连自己都看不懂！",
+        "desc": "恭喜！您的脑回路比重庆山路还十八弯。正常人从A到B，您从A到※再到杂然后莫名其妙就到了。您是行走的弹幕机器，走哪发哪，评论区永远比正文精彩。别人问今天吃了啥，您能扯到量子力学和暗恋史。"
+      },
+      "LAZYBONE": {
+        "code": "LAZYBONE",
+        "cn": "碳水永动机",
+        "intro": "我的膝盖已退化成装饰品",
+        "desc": "恭喜！您是碳水化合物成精，人形树懒后代。您深谙省力哲学：能发语音绝不打字，能点外卖绝不做饭，能躺着绝不坐着。您的运动步数永远不超过三位数，但您有精力在群里从早上八卦到凌晨。您用实际行动证明：懒，是推动人类科技进步的第一生产力。"
+      },
+      "CRAZYPANTS": {
+        "code": "CRAZYPANTS",
+        "cn": "发癫永动机",
+        "intro": "本宫的疯癫不需要理由！",
+        "desc": "恭喜！您的DNA里写着四个大字：立即发疯。您的人生是大型失控现场，情绪浓度比火锅底料还浓稠。别人安静，您轰鸣；别人理性，您玄学；别人计划，您随机。您就是那个在朋友婚礼上唱忐忑、在葬礼上蹦迪的社会活动家。您用实际行动证明：只要我疯得够快，现实就追不上我。"
+      },
+      "CHILLMASTER": {
+        "code": "CHILLMASTER",
+        "cn": "人间定海神针",
+        "intro": "泰山崩于前，我还在刷牙",
+        "desc": "恭喜！您是液体做的，天塌下来您能当被盖。您情绪稳定得像死机的电脑，任凭窗外风雨交加，您内心只有四个字：关我啥事。朋友崩溃找您倾诉，您能听着听着开始思考晚饭吃什么。您就是传说中的扫地僧，表面波澜不惊，内心弹幕横飞。"
+      },
+      "FOODIE": {
+        "code": "FOODIE",
+        "cn": "行走的饭桶",
+        "intro": "胃是最强的北京时间",
+        "desc": "恭喜！您的胃比您的人生规划还清晰。您对美食的追求已经达到了“食物学家”级别，能精准定位城市每一家好吃的外卖。您的手机相册里，食物照片比自拍还多。您的人生大事记不是按年份算，是按“吃过什么好吃的”来算的。"
+      },
+      "GAMER": {
+        "code": "GAMER",
+        "cn": "赛博佝偻",
+        "intro": "键盘比锄头硬，屏幕比窗户亮",
+        "desc": "恭喜！您的脊椎可能比您的游戏技术还弯曲。别人户外运动，您室内运动——眼保健操。您对游戏道具如数家珍，对饭圈词汇了如指掌。您的社会关系主要靠耳机和声卡维持。熬夜是您的日常，三餐靠零食续命，体检报告对您来说只是一串神秘代码。"
+      },
+      "INFLUENCER": {
+        "code": "INFLUENCER",
+        "cn": "流量信徒",
+        "intro": "点赞在哪里，人就在哪里",
+        "desc": "恭喜！您是互联网的传道士，社交媒体的忠实信徒。您的生活就是一场永不停止的直播，每一秒都值得被记录。您滤镜技术比化妆术还强，p图速度比打字速度还快。您的人生格言：没有粉丝的照片是不完整的，没有热度的日子是不值得过的。"
+      },
+      "NERD": {
+        "code": "NERD",
+        "cn": "知识U盘",
+        "intro": "脑子里插了根数据线",
+        "desc": "恭喜！您的大脑就是个可以随身携带的图书馆，虽然借阅者寥寥。您对冷知识的掌握比对自己的情绪还了解，在讨论区您是常年的热门评论员。您在社交中的主要功能是回答“这种问题你应该问百度啊”类问题。"
+      },
+      "ADVENTURER": {
+        "code": "ADVENTURER",
+        "cn": "野生冒险家",
+        "intro": "出发的时候，我不知道自己在干什么",
+        "desc": "恭喜！您的旅行计划永远停留在“说走就走”的阶段。您是朋友圈的野生地理学家，去过的地方比您认识的人还多。您最擅长的不是规划，而是：到了再说。您的人生就是一部没有剧本的公路片，主旨是：别问，问就是在路上。"
+      }
+    };
+
+    const app = {
+      shuffledQuestions: [],
+      answers: {},
+      previewMode: false,
+      currentIndex: 0
+    };
+
+    let screens;
+    let questionList;
+    let progressBar;
+    let progressText;
+    let submitBtn;
+    let testHint;
+    let loadingOverlay;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      screens = {
+        intro: document.getElementById('intro'),
+        test: document.getElementById('test'),
+        result: document.getElementById('result')
+      };
+
+      questionList = document.getElementById('questionList');
+      progressBar = document.getElementById('progressBar');
+      progressText = document.getElementById('progressText');
+      submitBtn = document.getElementById('submitBtn');
+      testHint = document.getElementById('testHint');
+      loadingOverlay = document.getElementById('loadingOverlay');
+    });
+
+    function showLoading() {
+      if (loadingOverlay) {
+        loadingOverlay.classList.add('active');
+      }
+    }
+
+    function hideLoading() {
+      if (loadingOverlay) {
+        loadingOverlay.classList.remove('active');
+      }
+    }
+
+    function showScreen(name) {
+      if (screens) {
+        Object.entries(screens).forEach(([key, el]) => {
+          if (el) {
+            el.classList.toggle('active', key === name);
+          }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function getVisibleQuestions() {
+      const visible = [...app.shuffledQuestions];
+      const gateIndex = visible.findIndex(q => q.id === 'drink_gate_q1');
+      if (gateIndex !== -1 && app.answers['drink_gate_q1'] === 3) {
+        visible.splice(gateIndex + 1, 0, specialQuestions[1]);
+      }
+      return visible;
+    }
+
+    function getQuestionMetaLabel(q) {
+      if (q.special) return '补充题';
+      return app.previewMode ? dimensionMeta[q.dim].name : '维度已隐藏';
+    }
+
+    function renderQuestions() {
+      if (questionList) {
+        const visibleQuestions = getVisibleQuestions();
+        questionList.innerHTML = '';
+
+        if (app.currentIndex >= visibleQuestions.length) {
+          app.currentIndex = visibleQuestions.length - 1;
+        }
+        if (app.currentIndex < 0) {
+          app.currentIndex = 0;
+        }
+
+        const q = visibleQuestions[app.currentIndex];
+        if (!q) return;
+
+        const card = document.createElement('article');
+        card.className = 'question';
+        card.innerHTML = `
+          <div class="question-meta">
+            <div class="badge">第 ${app.currentIndex + 1} 题</div>
+            <div>${getQuestionMetaLabel(q)}</div>
+          </div>
+          <div class="question-title">${q.text}</div>
+          <div class="options">
+            ${q.options.map((opt, i) => {
+              const code = ['A', 'B', 'C', 'D'][i] || String(i + 1);
+              const checked = app.answers[q.id] === opt.value ? 'checked' : '';
+              return `
+                <label class="option">
+                  <input type="radio" name="${q.id}" value="${opt.value}" ${checked} />
+                  <div class="option-code">${code}</div>
+                  <div>${opt.label}</div>
+                </label>
+              `;
+            }).join('')}
+          </div>
+        `;
+        questionList.appendChild(card);
+
+        makeQuestionsFocusable();
+
+        questionList.querySelectorAll('input[type="radio"]').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const { name, value } = e.target;
+            app.answers[name] = Number(value);
+
+            if (name === 'drink_gate_q1') {
+              if (Number(value) !== 3) {
+                delete app.answers['drink_gate_q2'];
+              }
+              renderQuestions();
+              return;
+            }
+
+            updateNavButtons();
+            updateProgress();
+
+            setTimeout(() => {
+              const visibleQuestions = getVisibleQuestions();
+              if (app.currentIndex < visibleQuestions.length - 1) {
+                app.currentIndex++;
+                renderQuestions();
+                updateProgress();
+              }
+            }, 300);
+          });
+        });
+
+        updateNavButtons();
+        updateProgress();
+      }
+    }
+
+    function updateNavButtons() {
+      const visibleQuestions = getVisibleQuestions();
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      if (prevBtn) {
+        prevBtn.disabled = app.currentIndex === 0;
+      }
+
+      if (nextBtn) {
+        if (app.currentIndex >= visibleQuestions.length - 1) {
+          nextBtn.textContent = '查看结果';
+          nextBtn.disabled = app.answers[visibleQuestions[app.currentIndex]?.id] === undefined;
+        } else {
+          nextBtn.textContent = '下一题 →';
+          nextBtn.disabled = app.answers[visibleQuestions[app.currentIndex]?.id] === undefined;
+        }
+      }
+    }
+
+    function updateProgress() {
+      if (progressBar && progressText) {
+        const visibleQuestions = getVisibleQuestions();
+        const total = visibleQuestions.length;
+        const done = visibleQuestions.filter(q => app.answers[q.id] !== undefined).length;
+        const percent = total ? (done / total) * 100 : 0;
+        progressBar.style.width = `${percent}%`;
+        progressText.textContent = `${app.currentIndex + 1} / ${total}`;
+      }
+    }
+
+    function sumToLevel(score) {
+      if (score <= 8) return 'L';
+      if (score <= 12) return 'M';
+      return 'H';
+    }
+
+    function levelNum(level) {
+      return { L: 1, M: 2, H: 3 }[level];
+    }
+
+    function parsePattern(pattern) {
+      return pattern.replace(/-/g, '').split('');
+    }
+
+    function getDrunkTriggered() {
+      return app.answers[DRUNK_TRIGGER_QUESTION_ID] === 2;
+    }
+
+    function computeResult() {
+      const rawScores = {};
+      const levels = {};
+      Object.keys(dimensionMeta).forEach(dim => { rawScores[dim] = 0; });
+
+      const answeredQuestions = getVisibleQuestions();
+      answeredQuestions.forEach(q => {
+        if (q.dim && app.answers[q.id] !== undefined) {
+          rawScores[q.dim] += Number(app.answers[q.id]);
+        }
+      });
+
+      Object.entries(rawScores).forEach(([dim, score]) => {
+        levels[dim] = sumToLevel(score);
+      });
+
+      let primaryType = 'HHHH';
+      let maxScore = 0;
+
+      if (rawScores.FUN > maxScore) { primaryType = 'FUNNY'; maxScore = rawScores.FUN; }
+      if (rawScores.WEIRD > maxScore) { primaryType = 'WEIRDO'; maxScore = rawScores.WEIRD; }
+      if (rawScores.LAZY > maxScore) { primaryType = 'LAZYBONE'; maxScore = rawScores.LAZY; }
+      if (rawScores.CRAZY > maxScore) { primaryType = 'CRAZYPANTS'; maxScore = rawScores.CRAZY; }
+      if (rawScores.CHILL > maxScore) { primaryType = 'CHILLMASTER'; maxScore = rawScores.CHILL; }
+
+      if (rawScores.FUN > 15 && rawScores.LAZY > 15) {
+        primaryType = 'FOODIE';
+      } else if (rawScores.CRAZY > 15 && rawScores.WEIRD > 15) {
+        primaryType = 'GAMER';
+      } else if (rawScores.FUN > 15 && rawScores.CHILL > 15) {
+        primaryType = 'INFLUENCER';
+      } else if (rawScores.WEIRD > 15 && rawScores.CHILL > 15) {
+        primaryType = 'NERD';
+      } else if (rawScores.CRAZY > 15 && rawScores.CHILL > 15) {
+        primaryType = 'ADVENTURER';
+      }
+
+      const drunkTriggered = getDrunkTriggered();
+
+      let finalType;
+      let modeKicker = '你的主类型';
+      let badge = `匹配度 ${80 + Math.floor(Math.random() * 16)}%`;
+      let sub = '系统备注会显示在这里。';
+      let special = false;
+      let secondaryType = null;
+
+      if (drunkTriggered) {
+        finalType = TYPE_LIBRARY.DRUNK;
+        secondaryType = TYPE_LIBRARY[primaryType];
+        modeKicker = '隐藏人格已激活';
+        badge = '匹配度 100% · 酒精异常因子已接管';
+        sub = '乙醇亲和性过强，系统已直接跳过常规人格审判。';
+        special = true;
+      } else {
+        finalType = TYPE_LIBRARY[primaryType] || TYPE_LIBRARY.HHHH;
+      }
+
+      return {
+        rawScores,
+        levels,
+        finalType,
+        modeKicker,
+        badge,
+        sub,
+        special,
+        secondaryType
+      };
+    }
+
+    function renderDimList(result) {
+      const dimList = document.getElementById('dimList');
+      dimList.innerHTML = '';
+      
+      // Create document fragment for better performance
+      const fragment = document.createDocumentFragment();
+      
+      dimensionOrder.forEach(dim => {
+        const level = result.levels[dim];
+        const explanation = DIM_EXPLANATIONS[dim][level];
+        const dimItem = document.createElement('div');
+        dimItem.className = 'dim-item';
+        dimItem.innerHTML = `
+          <div class="dim-item-top">
+            <div class="dim-item-name">${dimensionMeta[dim].name}</div>
+            <div class="dim-item-score">${level} / ${result.rawScores[dim]}分</div>
+          </div>
+          <p>${explanation}</p>
+        `;
+        fragment.appendChild(dimItem);
+      });
+      
+      dimList.appendChild(fragment);
+    }
+
+    function renderResult() {
+      showLoading();
+      
+      // Simulate processing time
+      setTimeout(() => {
+        const result = computeResult();
+        const type = result.finalType;
+
+        document.getElementById('resultModeKicker').textContent = result.modeKicker;
+        document.getElementById('resultTypeName').textContent = `${type.code}（${type.cn}）`;
+        document.getElementById('matchBadge').textContent = result.badge;
+        document.getElementById('resultTypeSub').textContent = result.sub;
+        document.getElementById('resultDesc').textContent = type.desc;
+        document.getElementById('posterCaption').textContent = type.intro;
+        document.getElementById('funNote').textContent = result.special
+          ? '本测试仅供娱乐。隐藏人格和傻乐兜底都属于作者故意埋的损招，请勿把它当成医学、心理学、相学、命理学或灵异学依据。' 
+          : '本测试仅供娱乐，别拿它当诊断、面试、相亲、分手、招魂、算命或人生判决书。你可以笑，但别太当真。';
+
+        const posterBox = document.getElementById('posterBox');
+        const posterImage = document.getElementById('posterImage');
+        const imageSrc = TYPE_IMAGES[type.code];
+        
+        if (imageSrc) {
+          posterImage.classList.add('loading');
+          posterImage.onload = function() {
+            posterImage.classList.remove('loading');
+          };
+          posterImage.src = imageSrc;
+          posterImage.alt = `${type.code}（${type.cn}）`;
+          posterBox.classList.remove('no-image');
+        } else {
+          posterImage.removeAttribute('src');
+          posterImage.alt = '';
+          posterBox.classList.add('no-image');
+        }
+
+        renderDimList(result);
+        showScreen('result');
+        hideLoading();
+      }, 800);
+    }
+
+    function startTest(preview = false) {
+      app.previewMode = preview;
+      app.answers = {};
+      app.currentIndex = 0;
+      const shuffledRegular = shuffle([...questions]);
+      const insertIndex = Math.floor(Math.random() * shuffledRegular.length) + 1;
+      app.shuffledQuestions = [
+        ...shuffledRegular.slice(0, insertIndex),
+        specialQuestions[0],
+        ...shuffledRegular.slice(insertIndex)
+      ];
+      renderQuestions();
+      showScreen('test');
+      updateProgress();
+    }
+
+    // Ripple effect
+    function createRipple(event) {
+      const button = event.currentTarget;
+      const ripple = document.createElement('span');
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = event.clientX - rect.left - size / 2;
+      const y = event.clientY - rect.top - size / 2;
+      
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.classList.add('ripple');
+      
+      button.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    }
+
+    // Apply ripple effect to all buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', createRipple);
+      });
+    });
+
+    // Make questions focusable
+    function makeQuestionsFocusable() {
+      document.querySelectorAll('.question').forEach(question => {
+        question.setAttribute('tabindex', '0');
+        question.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            const next = question.nextElementSibling;
+            if (next) next.focus();
+          } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const prev = question.previousElementSibling;
+            if (prev) prev.focus();
+          }
+        });
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const key = e.key;
+      const currentScreen = document.querySelector('.screen.active');
+      
+      if (currentScreen.id === 'intro' && (key === 'Enter' || key === ' ')) {
+        e.preventDefault();
+        startTest(false);
+        return;
+      }
+      
+      if (currentScreen.id === 'test') {
+        const visibleQuestions = getVisibleQuestions();
+        
+        if (key >= '1' && key <= '4') {
+          const num = parseInt(key) - 1;
+          const focusedQuestion = document.querySelector('.question:focus-within');
+          
+          if (focusedQuestion) {
+            const radios = focusedQuestion.querySelectorAll('input[type="radio"]');
+            if (radios[num]) {
+              radios[num].checked = true;
+              radios[num].dispatchEvent(new Event('change'));
+              
+              const nextQuestion = focusedQuestion.nextElementSibling;
+              if (nextQuestion && nextQuestion.classList.contains('question')) {
+                const nextRadios = nextQuestion.querySelectorAll('input[type="radio"]');
+                if (nextRadios.length > 0) {
+                  nextRadios[0].focus();
+                }
+              }
+            }
+          }
+        }
+        
+        if (key === 'Enter' && !submitBtn.disabled) {
+          e.preventDefault();
+          renderResult();
+        }
+        
+        if (key === 'Escape') {
+          showScreen('intro');
+        }
+      }
+      
+      if (currentScreen.id === 'result') {
+        if (key === '1' || key === 'Enter') {
+          startTest(false);
+        } else if (key === '2' || key === 'Escape') {
+          showScreen('intro');
+        }
+      }
+    });
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => startTest(false));
+      }
+      document.getElementById('backIntroBtn').addEventListener('click', () => showScreen('intro'));
+      document.getElementById('restartBtn').addEventListener('click', () => startTest(false));
+      document.getElementById('toTopBtn').addEventListener('click', () => showScreen('intro'));
+
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        if (app.currentIndex > 0) {
+          app.currentIndex--;
+          renderQuestions();
+          updateProgress();
+        }
+      });
+
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        const visibleQuestions = getVisibleQuestions();
+        if (app.currentIndex >= visibleQuestions.length - 1) {
+          if (app.answers[visibleQuestions[app.currentIndex]?.id] !== undefined) {
+            renderResult();
+          }
+        } else {
+          app.currentIndex++;
+          renderQuestions();
+          updateProgress();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
